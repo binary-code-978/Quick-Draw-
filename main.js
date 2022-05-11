@@ -20,5 +20,47 @@ function setup() {
     canvas = createCapture(280, 280);
     canvas.center();
     background("white");
-    canvas.mouseResleased(classifyCanvas);
+    canvas.mouseReleased(classifyCanvas);
+}
+
+function draw() {
+    strokeWeight(13);
+    stroke(0);
+    if (mouseIsPressed) {
+        line(pmouseX, pmouseY, mouseX, mouseY, )
+    }
+
+    check_sketch();
+    if (drawn_sketch == sketch) {
+        answer_holder = "set";
+        score++;
+        document.getElementById('score').innerHTML = 'Score:' + score;
+    }
+}
+
+function classifyCanvas() {
+    if (error, results) {
+        console.error(error)
+    }
+    console.log(results);
+    drawn_sketch = results[0].label;
+    document.getElementById('label').innerHTML = 'Your Sketch: ' + drawn_sketch;
+    document.getElementById('confidence').innerHTML = 'Confidence' + Math.round(results[0].confidence * 100) + "%";
+}
+
+
+function check_sketch() {
+    timer_counter++;
+    document.getElementById('time').innerHTML = "Timer" + timer_counter;
+    console.log(timer_counter);
+    if (timer_counter > 400) {
+        timer_counter = 0;
+        timer_check = "completed";
+    }
+
+    if (timer_check == "completed" || answer_holder == "set") {
+        timer_check = "";
+        answer_holder = "";
+        updateCanvas();
+    }
 }
